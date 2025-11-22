@@ -12,6 +12,11 @@ public class BudgetUserRoleRepository : IBudgetUserRoleRepository
         _context = context;
     }
 
+    public async Task<BudgetUserRole?> GetDefaultRoleAsync()
+    {
+        return await _context.BudgetUserRoles.FirstOrDefaultAsync(r => r.Name == "GUEST");
+    }
+
     public async Task<BudgetUserRole?> GetByNameAsync(string roleName)
     {
         return await _context.BudgetUserRoles.FirstOrDefaultAsync(r => r.Name == roleName);

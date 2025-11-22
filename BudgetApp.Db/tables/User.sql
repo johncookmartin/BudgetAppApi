@@ -15,6 +15,5 @@
 GO
 
 CREATE UNIQUE NONCLUSTERED INDEX IX_Users_GoogleSubject ON [dbo].[User]([GoogleSubject])
-INCLUDE ([Email])
-WITH (ONLINE = ON);
+INCLUDE ([Email], [DisplayName])
 GO

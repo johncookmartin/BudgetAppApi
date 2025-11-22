@@ -12,11 +12,21 @@ public class BudgetUser
     public BudgetUserRole Role { get; set; } = null!;
 
     private BudgetUser() { }
-    public BudgetUser(string googleSubject, string email, string displayName, BudgetUserRole role)
+    public BudgetUser(
+        string googleSubject,
+        string email,
+        string displayName,
+        string? pictureUrl,
+        string? familyName,
+        string? givenName,
+        BudgetUserRole role)
     {
         GoogleSubject = googleSubject;
         Email = email;
         DisplayName = displayName;
+        PictureUrl = pictureUrl;
+        FamilyName = familyName;
+        GivenName = givenName;
         RoleId = role.Id;
         Role = role;
     }

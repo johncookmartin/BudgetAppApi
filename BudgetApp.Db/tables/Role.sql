@@ -3,4 +3,8 @@
 	[Id] INT NOT NULL PRIMARY KEY,
 	[Name] NVARCHAR(100) NOT NULL,
 	[Description] NVARCHAR(255) NULL
-)
+);
+GO
+
+CREATE UNIQUE NONCLUSTERED INDEX IX_Roles_Name ON [dbo].[Role]([Name]);
+GO

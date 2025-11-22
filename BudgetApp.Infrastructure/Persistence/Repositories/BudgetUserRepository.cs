@@ -25,4 +25,9 @@ public class BudgetUserRepository : IUserRepository
     {
         return await _context.BudgetUsers.Include(u => u.Role).FirstOrDefaultAsync(u => u.GoogleSubject == sub);
     }
+
+    public void Update(BudgetUser user)
+    {
+        _context.BudgetUsers.Update(user);
+    }
 }
