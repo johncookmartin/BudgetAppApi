@@ -23,7 +23,11 @@ public class AuthService : IAuthService
         var user = await _userRepo.GetByGoogleSubjectAsync(googleSub);
         if (user is null)
         {
-            BudgetUserRole defaultRole = await _roleRepo.GetDefaultRoleAsync();
+            BudgetUserRole? defaultRole = await _roleRepo.GetDefaultRoleAsync();
+            if (defaultRole is null)
+            {
+                throw new InvalidOperationException("Default user role is not configured.");
+            }
             user = new BudgetUser
             (
                 googleSubject: googleSub,
