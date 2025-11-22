@@ -1,11 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20 d17.14
+VisualStudioVersion = 17.14.36705.20
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Api", "BudgetApp.Api\BudgetApp.Api.csproj", "{D0760625-44EB-4B6F-B59A-C43789754773}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91} = {2FD45E6B-E2FD-4614-B52A-187757DECB91}
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B} = {B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}
+		{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E} = {C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}
+	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BudgetApp.Db", "BudgetApp.Db\BudgetApp.Db.sqlproj", "{6769F736-E8C5-46E6-BB54-D75AEB8F080A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Domain", "BudgetApp.Domain\BudgetApp.Domain.csproj", "{2FD45E6B-E2FD-4614-B52A-187757DECB91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Infrastructure", "BudgetApp.Infrastructure\BudgetApp.Infrastructure.csproj", "{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B} = {B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Application", "BudgetApp.Application\BudgetApp.Application.csproj", "{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91} = {2FD45E6B-E2FD-4614-B52A-187757DECB91}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +40,18 @@ Global
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD45E6B-E2FD-4614-B52A-187757DECB91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3A7811C-3EAE-4861-B2B8-F82DAE18C25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7EEE0BD-D042-4D0A-A857-03E984FA5A4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
