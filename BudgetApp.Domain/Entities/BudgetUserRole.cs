@@ -1,13 +1,15 @@
-﻿using BudgetApp.Domain.Common;
-
-namespace BudgetApp.Domain.Entities;
-public class BudgetUserRole : Enumeration
+﻿namespace BudgetApp.Domain.Entities;
+public class BudgetUserRole
 {
-    public static BudgetUserRole Guest = new(1, "GUEST");
-    public static BudgetUserRole User = new(2, "USER");
-    public static BudgetUserRole Admin = new(3, "ADMIN");
-    private BudgetUserRole(int id, string name) : base(id, name)
+    public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
+
+    private BudgetUserRole() { }
+    public BudgetUserRole(int id, string name, string? description = null)
     {
+        Id = id;
+        Name = name;
+        Description = description;
     }
-    private BudgetUserRole() : base(1, "GUEST") { }
 }

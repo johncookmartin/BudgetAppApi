@@ -5,7 +5,11 @@ public class BudgetUser
     public string GoogleSubject { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
     public string DisplayName { get; set; } = string.Empty;
-    public BudgetUserRole Role { get; set; } = BudgetUserRole.Guest;
+    public string? PictureUrl { get; set; }
+    public string? FamilyName { get; set; }
+    public string? GivenName { get; set; }
+    public int RoleId { get; set; }
+    public BudgetUserRole Role { get; set; } = null!;
 
     private BudgetUser() { }
     public BudgetUser(string googleSubject, string email, string displayName, BudgetUserRole role)
@@ -13,6 +17,7 @@ public class BudgetUser
         GoogleSubject = googleSubject;
         Email = email;
         DisplayName = displayName;
+        RoleId = role.Id;
         Role = role;
     }
 
@@ -20,5 +25,11 @@ public class BudgetUser
     {
         Email = email;
         DisplayName = displayName;
+    }
+
+    public void ChangeRole(BudgetUserRole newRole)
+    {
+        RoleId = newRole.Id;
+        Role = newRole;
     }
 }

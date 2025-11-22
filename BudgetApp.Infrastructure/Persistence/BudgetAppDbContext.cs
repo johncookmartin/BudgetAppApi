@@ -9,15 +9,15 @@ public class BudgetAppDbContext : DbContext
     {
     }
 
-    public DbSet<BudgetUser> Users => Set<BudgetUser>();
-    public DbSet<BudgetUserRole> Roles => Set<BudgetUserRole>();
+    public DbSet<BudgetUser> BudgetUsers => Set<BudgetUser>();
+    public DbSet<BudgetUserRole> BudgetUserRoles => Set<BudgetUserRole>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new BudgetUserConfiguration());
+        modelBuilder.ApplyConfiguration(new BudgetUserRoleConfiguration());
     }
 
 }

@@ -11,10 +11,12 @@ namespace BudgetApp.Api.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly IUserRepository _userRepo;
+    private readonly IBudgetUserRoleRepository _roleRepo;
 
-    public AuthController(IUserRepository userRepo)
+    public AuthController(IUserRepository userRepo, IBudgetUserRoleRepository roleRepo)
     {
         _userRepo = userRepo;
+        _roleRepo = roleRepo;
     }
 
     [HttpPost("ensure-user")]
@@ -27,7 +29,8 @@ public class AuthController : ControllerBase
 
         if (user is null)
         {
-            user = new BudgetUser(sub, email, name, BudgetUserRole.User);
+            BudgetUserRole guestRole = await _roleRepo.GetByNameAsync("GUEST");
+            user = new BudgetUser(sub, email, name, guestRole);
             await _userRepo.AddAsync(user);
         }
         else
@@ -42,7 +45,7 @@ public class AuthController : ControllerBase
             Id = user.Id,
             Email = user.Email,
             DisplayName = user.DisplayName,
-            Role = user.Role.ToString()
+            Role = user.Role.Name
         };
 
         return Ok(userDto);
@@ -63,7 +66,7 @@ public class AuthController : ControllerBase
             Id = user.Id,
             Email = user.Email,
             DisplayName = user.DisplayName,
-            Role = user.Role.ToString()
+            Role = user.Role.Name
         };
         return Ok(userDto);
     }

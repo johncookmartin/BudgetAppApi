@@ -17,7 +17,8 @@ public static class DependencyInjection
         services.AddDbContext<BudgetAppDbContext>(options =>
             options.UseSqlServer(connectionString));
 
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, BudgetUserRepository>();
+        services.AddScoped<IBudgetUserRoleRepository, BudgetUserRoleRepository>();
 
         return services;
     }
