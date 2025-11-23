@@ -15,7 +15,7 @@ This project aims to present financial data clearly while making it easy to calc
 It also gives us the freedom to grow the tool in ways a static spreadsheet no longer allowed.
 
 ## Features
-- Google Sign-in authentication
-- RESTful .NET API built using EF Core
+- Authentication Layer using EF Core (currently using Google Sign-In)
+- RESTful .NET API
 - SQL Server relational database
 
