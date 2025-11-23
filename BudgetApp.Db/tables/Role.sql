@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Role]
+﻿CREATE TABLE [dbo].[Roles]
 (
 	[Id] INT NOT NULL PRIMARY KEY,
 	[Name] NVARCHAR(100) NOT NULL,
@@ -6,5 +6,5 @@
 );
 GO
 
-CREATE UNIQUE NONCLUSTERED INDEX IX_Roles_Name ON [dbo].[Role]([Name]);
+CREATE UNIQUE NONCLUSTERED INDEX IX_Roles_Name ON [dbo].[Roles]([Name]);
 GO

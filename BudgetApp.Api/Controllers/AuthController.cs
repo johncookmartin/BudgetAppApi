@@ -1,7 +1,6 @@
-﻿using BudgetApp.Api.Identity;
-using BudgetApp.Api.Models;
-using BudgetApp.Application.Auth;
-using BudgetApp.Domain.Entities;
+﻿using BudgetApp.Api.Models;
+using BudgetApp.Auth.Data.Entities;
+using BudgetApp.Auth.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,14 +20,7 @@ public class AuthController : ControllerBase
     [Authorize]
     public async Task<ActionResult<UserDto>> EnsureUser()
     {
-        BudgetUser budgetUser = await _authService.EnsureUserAsync(
-            googleSub: User.GetGoogleSub(),
-            email: User.GetGoogleEmail(),
-            displayName: User.GetGoogleName(),
-            pictureUrl: User.GetGooglePicture(),
-            familyName: User.GetGoogleFamilyName(),
-            givenName: User.GetGoogleGivenName()
-            );
+        BudgetUser budgetUser = await _authService.EnsureUserAsync(User);
 
         var userDto = new UserDto
         {

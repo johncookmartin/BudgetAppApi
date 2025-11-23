@@ -5,13 +5,13 @@ BEGIN TRANSACTION;
 IF NOT EXISTS(
     SELECT 1
     FROM sys.indexes i
-    WHERE i.name = 'UX_Role_Name' AND i.object_id = OBJECT_ID('dbo.Role')
+    WHERE i.name = 'UX_Roles_Name' AND i.object_id = OBJECT_ID('dbo.Roles')
 )
 BEGIN
-    CREATE UNIQUE NONCLUSTERED INDEX UX_Roles_Name ON dbo.Role(Name);
+    CREATE UNIQUE NONCLUSTERED INDEX UX_Roles_Name ON dbo.Roles(Name);
 END
 
-MERGE dbo.Role AS target
+MERGE dbo.Roles AS target
 USING (VALUES
     (1, 'GUEST', 'Guest user with minimal access'),
     (2, 'USER', 'Regular user with limited access'),

@@ -1,7 +1,4 @@
-using BudgetApp.Application;
-using BudgetApp.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+using BudgetApp.Auth;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -54,41 +51,14 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Google Authentication Configuration
-var googleClientId = builder.Configuration["Authentication:Google:ClientId"]
-    ?? throw new InvalidOperationException("Missing Google ClientId");
-
-builder.Services
-    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = "https://accounts.google.com";
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "https://accounts.google.com",
-
-            ValidateAudience = true,
-            ValidAudience = googleClientId,
-
-            ValidateLifetime = true
-        };
-
-        options.MapInboundClaims = false;
-    });
+//Add Authentication Layer
+builder.Services.AddAuthLayer(builder.Configuration);
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-// Add Application and Infrastructure layers
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

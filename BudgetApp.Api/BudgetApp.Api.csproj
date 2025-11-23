@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -13,8 +13,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\BudgetApp.Application\BudgetApp.Application.csproj" />
-		<ProjectReference Include="..\BudgetApp.Infrastructure\BudgetApp.Infrastructure.csproj" />
+		<ProjectReference Include="..\BudgetApp.Auth\BudgetApp.Auth.csproj" />
 	</ItemGroup>
 
 </Project>

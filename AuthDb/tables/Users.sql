@@ -8,9 +8,7 @@
     [LastLoginAt] DATETIME2 NULL,
     [PictureUrl] NVARCHAR(512) NULL,
     [FamilyName] NVARCHAR(100) NULL,
-    [GivenName] NVARCHAR(100) NULL, 
-    [RoleId] INT NOT NULL,
-    CONSTRAINT FK_Users_Roles FOREIGN KEY ([RoleId]) REFERENCES [Roles]([Id])
+    [GivenName] NVARCHAR(100) NULL
 );
 GO
 

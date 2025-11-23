@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Permission]
+﻿CREATE TABLE [dbo].[Permissions]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY(1,1), 
     [Key] NVARCHAR(100) NOT NULL,
