@@ -1,8 +1,10 @@
 ﻿using BudgetApp.Auth.Data;
+using BudgetApp.Auth.Data.Entities;
 using BudgetApp.Auth.Data.Repositories;
 using BudgetApp.Auth.Interfaces;
 using BudgetApp.Auth.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +17,19 @@ public static class DependencyInjection
     {
         string? connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(connectionString));
+
+        services.AddIdentityCore<BudgetUser>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
+            .AddEntityFrameworkStores<AuthDbContext>()
+            .AddSignInManager();
 
         string? googleClientId = configuration["Authentication:Google:ClientId"]
             ?? throw new InvalidOperationException("Missing Google ClientId");

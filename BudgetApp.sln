@@ -1,16 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36705.20
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11222.15 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Api", "BudgetApp.Api\BudgetApp.Api.csproj", "{D0760625-44EB-4B6F-B59A-C43789754773}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A19AA805-0DD6-4B7E-8640-7D6A03E882B0} = {A19AA805-0DD6-4B7E-8640-7D6A03E882B0}
-	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BudgetApp.Db", "BudgetApp.Db\BudgetApp.Db.sqlproj", "{6769F736-E8C5-46E6-BB54-D75AEB8F080A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetApp.Auth", "BudgetApp.Auth\BudgetApp.Auth.csproj", "{A19AA805-0DD6-4B7E-8640-7D6A03E882B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,10 +23,6 @@ Global
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6769F736-E8C5-46E6-BB54-D75AEB8F080A}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{A19AA805-0DD6-4B7E-8640-7D6A03E882B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A19AA805-0DD6-4B7E-8640-7D6A03E882B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A19AA805-0DD6-4B7E-8640-7D6A03E882B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A19AA805-0DD6-4B7E-8640-7D6A03E882B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

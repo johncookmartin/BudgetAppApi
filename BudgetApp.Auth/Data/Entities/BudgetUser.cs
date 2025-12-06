@@ -1,9 +1,9 @@
-﻿namespace BudgetApp.Auth.Data.Entities;
-public class BudgetUser
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace BudgetApp.Auth.Data.Entities;
+public class BudgetUser : IdentityUser
 {
-    public int Id { get; set; }
     public string GoogleSubject { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
     public string DisplayName { get; set; } = string.Empty;
     public string? PictureUrl { get; set; }
     public string? FamilyName { get; set; }
