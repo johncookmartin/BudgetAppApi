@@ -89,17 +89,19 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-        var result = await _tokenService.RefreshTokenAsync(refreshToken);
-        if (!result.Succeeded)
+
+        var validationResult = await _tokenService.ValidateRefreshTokenAsync(refreshToken);
+        if (!validationResult.Succeeded)
         {
             return Unauthorized();
         }
 
-        var accessToken = result.AccessToken;
-        var newRefreshToken = result.RefreshToken;
+        var user = validationResult.User;
+        var accessToken = await _tokenService.GenerateTokenAsync(user, validationResult.Roles);
+        var newRefreshToken = await _tokenService.GenerateRefreshTokenAsync(user);
         SetRefreshTokenCookie(newRefreshToken);
 
-        return Ok(new { AccessToken = accessToken });
+        return Ok(new { AccessToken = accessToken, User = new { id = user.Id, email = user.Email } });
 
     }
 
@@ -143,12 +145,13 @@ public class AuthController : ControllerBase
             return Problem(detail: "User or roles not found.", statusCode: StatusCodes.Status500InternalServerError);
         }
 
-        var accessToken = _tokenService.GenerateTokenAsync(result.User, result.Roles);
+        var user = result.User;
+
+        var accessToken = await _tokenService.GenerateTokenAsync(result.User, result.Roles);
         var refreshToken = await _tokenService.GenerateRefreshTokenAsync(result.User);
 
         SetRefreshTokenCookie(refreshToken);
-
-        return Ok(new { AccessToken = accessToken });
+        return Ok(new { AccessToken = accessToken, User = new { id = user.Id, email = user.Email } });
     }
 
     private void SetRefreshTokenCookie(string refreshToken)
