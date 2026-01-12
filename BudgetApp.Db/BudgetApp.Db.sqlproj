@@ -57,9 +57,12 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="tables" />
+    <Folder Include="schemas" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\User.sql" />
+    <Build Include="tables\AspNetUsers.sql" />
+    <Build Include="schemas\auth.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
