@@ -60,13 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\User.sql" />
-    <Build Include="tables\Role.sql" />
-    <Build Include="tables\Permission.sql" />
-    <Build Include="tables\RolePermission.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
-    <None Include="SeedRoles.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BudgetApp.Db.publish.xml" />

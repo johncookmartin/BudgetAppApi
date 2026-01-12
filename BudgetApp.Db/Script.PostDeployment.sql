@@ -10,6 +10,3 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 
-
--- Create Roles
-:r .\SeedRoles.sql

@@ -4,7 +4,7 @@ using Microsoft.OpenApi;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthServices(builder.Configuration);
+builder.Services.AddAuthServices<ApiAssemblyMarker>(builder.Configuration);
 
 //Swagger Configuration
 builder.Services.AddEndpointsApiExplorer();
@@ -62,3 +62,5 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+public sealed class ApiAssemblyMarker { }
