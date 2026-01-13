@@ -58,11 +58,14 @@
     <Folder Include="Properties" />
     <Folder Include="tables" />
     <Folder Include="schemas" />
+    <Folder Include="Programmability" />
+    <Folder Include="Programmability\Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="tables\User.sql" />
     <Build Include="tables\AspNetUsers.sql" />
     <Build Include="schemas\auth.sql" />
+    <Build Include="Programmability\Stored Procedures\stp_BudgetUser_Create.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
