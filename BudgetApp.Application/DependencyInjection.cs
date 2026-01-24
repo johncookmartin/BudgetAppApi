@@ -1,4 +1,6 @@
 ﻿using AuthLibrary;
+using BudgetApp.Application.Services.Auth;
+using BudgetApp.Application.Services.Auth.Interfaces;
 using BudgetApp.DataAccess.Data;
 using BudgetApp.DataAccess.Data.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -11,10 +13,17 @@ public static class DependencyInjection
     public static IServiceCollection AddServices<TMigrationAssemblyMarker>(this IServiceCollection services, IConfiguration configuration)
     {
         // Add application services here
+
+        // Auth
         services.AddAuthServices<TMigrationAssemblyMarker>(configuration);
 
-        services.AddSingleton<IBudgetAppDataAccess, BudgetAppDataAccess>();
-        services.AddSingleton<IBudgetUserData, BudgetUserData>();
+        // Data
+        services.AddScoped<IBudgetAppUnitOfWork, BudgetAppUnitOfWork>();
+        services.AddScoped<IBudgetAppDataAccess, BudgetAppDataAccess>();
+        services.AddScoped<IBudgetUserData, BudgetUserData>();
+
+        // Services
+        services.AddScoped<IAuthService, AuthService>();
 
         return services;
     }
