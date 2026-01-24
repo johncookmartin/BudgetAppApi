@@ -2,7 +2,7 @@
 using BudgetApp.Application.Services.Auth;
 using BudgetApp.Application.Services.Auth.Interfaces;
 using BudgetApp.DataAccess.Data;
-using BudgetApp.DataAccess.Data.Interfaces;
+using BudgetApp.DataAccess.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,8 +12,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddServices<TMigrationAssemblyMarker>(this IServiceCollection services, IConfiguration configuration)
     {
-        // Add application services here
-
         // Auth
         services.AddAuthServices<TMigrationAssemblyMarker>(configuration);
 

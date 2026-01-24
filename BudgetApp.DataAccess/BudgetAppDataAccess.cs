@@ -1,4 +1,4 @@
-﻿using BudgetApp.DataAccess.Data.Interfaces;
+﻿using BudgetApp.DataAccess.Interfaces;
 using Dapper;
 using System.Data;
 

@@ -1,4 +1,4 @@
-﻿namespace BudgetApp.DataAccess.Data.Interfaces;
+﻿namespace BudgetApp.DataAccess.Interfaces;
 
 public interface IBudgetUserData
 {

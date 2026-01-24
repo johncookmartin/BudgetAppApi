@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace BudgetApp.DataAccess.Data.Interfaces;
+namespace BudgetApp.DataAccess.Interfaces;
 
 public interface IBudgetAppDataAccess
 {

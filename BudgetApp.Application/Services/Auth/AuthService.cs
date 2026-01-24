@@ -5,7 +5,7 @@ using AuthLibrary.DTOs.Register;
 using AuthLibrary.Services.Interfaces;
 using BudgetApp.Application.Services.Auth.DTOs;
 using BudgetApp.Application.Services.Auth.Interfaces;
-using BudgetApp.DataAccess.Data.Interfaces;
+using BudgetApp.DataAccess.Interfaces;
 
 namespace BudgetApp.Application.Services.Auth;
 
