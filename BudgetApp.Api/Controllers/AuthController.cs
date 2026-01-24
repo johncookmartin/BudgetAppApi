@@ -1,5 +1,8 @@
-﻿using AuthLibrary.DTOs;
-using AuthLibrary.Services.Interfaces;
+﻿using AuthLibrary.DTOs.Google;
+using AuthLibrary.DTOs.Login;
+using AuthLibrary.DTOs.Register;
+using BudgetApp.Application.Services.Auth.DTOs;
+using BudgetApp.Application.Services.Auth.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BudgetApp.Api.Controllers;
@@ -8,30 +11,24 @@ namespace BudgetApp.Api.Controllers;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly IUserService _userService;
-    private readonly ITokenService _tokenService;
-    private readonly IGoogleService _googleService;
+    private readonly IAuthService _authService;
 
-    public AuthController(IUserService userService,
-        ITokenService tokenService,
-        IGoogleService googleService)
+    public AuthController(IAuthService authService)
     {
-        _userService = userService;
-        _tokenService = tokenService;
-        _googleService = googleService;
+        _authService = authService;
     }
 
     [HttpPost]
     [Route("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
-        var result = await _userService.RegisterUser(request);
+        var result = await _authService.RegisterAsync(request);
         if (!result.Succeeded)
         {
             return BadRequest(new { Errors = result.Errors });
         }
 
-        return await LoginHandler(new LoginRequestDto
+        return await LoginHandler(new LoginRequest
         {
             Email = request.Email,
             Password = request.Password,
@@ -40,40 +37,18 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequestDto request)
+    public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         return await LoginHandler(request);
     }
 
     [HttpPost]
     [Route("google-login")]
-    public async Task<IActionResult> GoogleLogin([FromBody] GoogleRequestDto request)
+    public async Task<IActionResult> GoogleLogin([FromBody] GoogleRequest request)
     {
-        var googleResult = await _googleService.LoginWithGoogleAsync(request);
-        if (!googleResult.Succeeded)
-        {
-            return BadRequest(new { Errors = googleResult.Errors });
-        }
+        var googleResult = await _authService.LoginWithGoogleAsync(request);
 
-        var user = await _userService.GetUserByEmailAsync(googleResult.Email);
-        if (user is null)
-        {
-            var registerResult = await _userService.RegisterUser(new RegisterRequestDto
-            {
-                Email = googleResult.Email,
-                Initials = _googleService.GenerateInitialsFromName(googleResult.FamilyName, googleResult.GivenName),
-                Provider = "Google",
-                ProviderKey = googleResult.Subject,
-                Name = googleResult.DisplayName,
-            });
-            if (!registerResult.Succeeded)
-            {
-                return BadRequest(new { Errors = registerResult.Errors });
-            }
-            user = registerResult.User;
-        }
-
-        return await LoginHandler(new LoginRequestDto
+        return await LoginHandler(new LoginRequest
         {
             Email = googleResult.Email,
             Provider = "Google",
@@ -90,18 +65,16 @@ public class AuthController : ControllerBase
             return Unauthorized();
         }
 
-        var validationResult = await _tokenService.ValidateRefreshTokenAsync(refreshToken);
-        if (!validationResult.Succeeded)
+        AuthRefreshTokenResult result = await _authService.RefreshTokenAsync(refreshToken);
+        if (!result.Succeeded)
         {
             return Unauthorized();
         }
 
-        var user = validationResult.User;
-        var accessToken = await _tokenService.GenerateTokenAsync(user, validationResult.Roles);
-        var newRefreshToken = await _tokenService.GenerateRefreshTokenAsync(user);
-        SetRefreshTokenCookie(newRefreshToken);
+        var user = result.User!;
+        SetRefreshTokenCookie(result.RefreshToken);
 
-        return Ok(new { AccessToken = accessToken, User = new { id = user.Id, email = user.Email } });
+        return Ok(new { AccessToken = result.AccessToken, User = new { id = user.Id, email = user.Email } });
 
     }
 
@@ -113,13 +86,12 @@ public class AuthController : ControllerBase
         {
             return Unauthorized();
         }
-        var existingToken = await _tokenService.ValidateRefreshTokenAsync(refreshToken);
-        if (!existingToken.Succeeded)
+
+        var logoutResult = await _authService.LogoutAsync(refreshToken);
+        if (!logoutResult.Succeeded)
         {
             return Unauthorized();
         }
-
-        await _tokenService.RevokeRefreshTokensAsync(existingToken.User.Id);
 
         var cookieOptions = new CookieOptions
         {
@@ -130,12 +102,13 @@ public class AuthController : ControllerBase
             Path = "/api/auth"
         };
         Response.Cookies.Append("refreshToken", string.Empty, cookieOptions);
+
         return Ok();
     }
 
-    private async Task<IActionResult> LoginHandler(LoginRequestDto request)
+    private async Task<IActionResult> LoginHandler(LoginRequest request)
     {
-        var result = await _userService.LoginUser(request);
+        var result = await _authService.LoginAsync(request);
         if (!result.Succeeded)
         {
             return Unauthorized();
@@ -146,12 +119,10 @@ public class AuthController : ControllerBase
         }
 
         var user = result.User;
+        var tokenResult = await _authService.GenerateTokensAsync(user, result.Roles);
 
-        var accessToken = await _tokenService.GenerateTokenAsync(result.User, result.Roles);
-        var refreshToken = await _tokenService.GenerateRefreshTokenAsync(result.User);
-
-        SetRefreshTokenCookie(refreshToken);
-        return Ok(new { AccessToken = accessToken, User = new { id = user.Id, email = user.Email } });
+        SetRefreshTokenCookie(tokenResult.RefreshToken);
+        return Ok(new { AccessToken = tokenResult.AccessToken, User = new { id = user.Id, email = user.Email } });
     }
 
     private void SetRefreshTokenCookie(string refreshToken)

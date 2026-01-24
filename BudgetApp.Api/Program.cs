@@ -1,10 +1,10 @@
-using AuthLibrary;
+using BudgetApp.Application;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddAuthServices<ApiAssemblyMarker>(builder.Configuration);
+builder.Services.AddServices<ApiAssemblyMarker>(builder.Configuration);
 
 //Swagger Configuration
 builder.Services.AddEndpointsApiExplorer();
@@ -55,7 +55,7 @@ else
     app.UseCors("Prod");
 }
 
-await app.AuthInitialization();
+await app.ServiceInitialization();
 
 app.UseHttpsRedirection();
 

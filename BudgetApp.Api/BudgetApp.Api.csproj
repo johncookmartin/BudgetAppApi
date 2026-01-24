@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\AuthLibrary\AuthLibrary.csproj" />
+    <ProjectReference Include="..\BudgetApp.Application\BudgetApp.Application.csproj" />
   </ItemGroup>
 
 <ItemGroup>

@@ -2,5 +2,5 @@
 
 public interface IBudgetUserData
 {
-    Task<int> CreateUserAsync(string authId);
+    Task<int> CreateUserAsync(Guid authId);
 }
