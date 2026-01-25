@@ -2,8 +2,8 @@
 	@AuthId UNIQUEIDENTIFIER
 AS
 BEGIN
-	INSERT INTO [dbo].[BudgetUsers] ([AuthId])
-	VALUES (@AuthId);
+	INSERT INTO [dbo].[BudgetUsers] ([AuthId], [CreatedAt], [UpdatedAt])
+	VALUES (@AuthId, GETUTCDATE(), GETUTCDATE());
 
 	SELECT SCOPE_IDENTITY();
 END

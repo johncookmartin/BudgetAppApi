@@ -66,6 +66,9 @@
     <Build Include="tables\AspNetUsers.sql" />
     <Build Include="schemas\auth.sql" />
     <Build Include="Programmability\Stored Procedures\stp_BudgetUser_Create.sql" />
+    <Build Include="Programmability\Stored Procedures\stp_BudgetUser_Update.sql" />
+    <Build Include="Programmability\Stored Procedures\stp_BudgetUserId_GetByAuthId.sql" />
+    <Build Include="Programmability\Stored Procedures\stp_BudgetUser_GetById.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

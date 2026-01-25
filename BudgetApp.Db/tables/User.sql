@@ -5,6 +5,9 @@
 	[ProfilePictureUrl] NVARCHAR(2083) NULL,
 	[FirstName] NVARCHAR(100) NULL,
 	[LastName] NVARCHAR(100) NULL,
+	[CreatedAt] DATETIME2 NOT NULL DEFAULT(GETUTCDATE()),
+	[UpdatedAt] DATETIME2 NOT NULL DEFAULT(GETUTCDATE()),
+	[DeletedAt] DATETIME2 NULL,
     CONSTRAINT [FK_BudgetUsers_AspNetUsers] FOREIGN KEY ([AuthId]) REFERENCES [auth].[AspNetUsers]([Id])
 
 );
